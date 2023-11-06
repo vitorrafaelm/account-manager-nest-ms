@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  account-manager-api: 
+    container_name: account-manager-api
+    build:
+      context: ./
+      target: "dev"
+      dockerfile: Dockerfile
+    entrypoint: ["npm", "run", "start:dev"]
+    env_file: 
+      - .env/local.env
+    ports:
+      - "3000:3000"
+    networks: 
+      - account-manager-project
+    depends_on: 
+      - account-manager-database
+      
+  account-manager-database:
+    image: postgres
+    container_name: 'account-manager-database'
+    volumes:
+      - ./postgresql:/var/lib/postgresql/data_account_manager
+    ports: 
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - account-manager-project
+
+volumes:
+  database_account-manager:
+
+networks:
+  account-manager-project:
+    external: true
