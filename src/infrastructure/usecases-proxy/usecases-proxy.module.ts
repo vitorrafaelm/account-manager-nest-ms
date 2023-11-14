@@ -7,10 +7,12 @@ import { DatabaseBrokerRepository } from '../repositories/broker.repository';
 
 import { EnvironmentConfigModule } from '../config/environment-config/environment-config.module';
 import { UseCaseProxy } from './usecases-proxy';
+import { RabbitmqModule } from '../rabbitmq/rabbitmq.module';
+import { UserCreatedPublishService } from '../rabbitmq/publishers/user-created/user-create-publish.service';
 
 
 @Module({
-  imports: [EnvironmentConfigModule, RepositoriesModule],
+  imports: [EnvironmentConfigModule, RepositoriesModule, RabbitmqModule],
 })
 export class UsecasesProxyModule {
   static GET_BROKER_USECASES_PROXY = 'getBrokerUsecasesProxy';
@@ -26,9 +28,9 @@ export class UsecasesProxyModule {
           useFactory: (brokerRepository: DatabaseBrokerRepository) => new UseCaseProxy(new FindBrokerUseCase(brokerRepository)),
         },
         {
-          inject: [DatabaseBrokerRepository],
+          inject: [DatabaseBrokerRepository, UserCreatedPublishService],
           provide: UsecasesProxyModule.CREATE_BROKER_USECASES_PROXY,
-          useFactory: (brokerRepository: DatabaseBrokerRepository) => new UseCaseProxy(new CreateBrokerUseCase(brokerRepository)),
+          useFactory: (brokerRepository: DatabaseBrokerRepository, userCreatedPublish: UserCreatedPublishService) => new UseCaseProxy(new CreateBrokerUseCase(brokerRepository, userCreatedPublish)),
         }
       ],
       exports: [
