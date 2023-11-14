@@ -4,6 +4,7 @@ import { TypeormConfigModule } from './infrastructure/config/typeorm/typeorm.mod
 import { RepositoriesModule } from './infrastructure/repositories/repositories.module';
 import { ControllersModule } from './infrastructure/controllers/controllers.module';
 import { UsecasesProxyModule } from './infrastructure/usecases-proxy/usecases-proxy.module';
+import { RabbitmqModule } from './infrastructure/rabbitmq/rabbitmq.module';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import { UsecasesProxyModule } from './infrastructure/usecases-proxy/usecases-pr
     TypeormConfigModule, 
     RepositoriesModule, 
     ControllersModule, 
-    UsecasesProxyModule.register()
+    UsecasesProxyModule.register(), RabbitmqModule
   ],
   controllers: [],
   providers: [],
