@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EnvironmentConfigService } from './environment-config.service';
 
-console.log(process.env, '--------------------')
-
 @Module({
     imports: [
       ConfigModule.forRoot({

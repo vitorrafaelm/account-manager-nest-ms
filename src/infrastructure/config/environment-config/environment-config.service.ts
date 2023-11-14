@@ -7,9 +7,6 @@ export class EnvironmentConfigService implements DatabaseConfig {
     constructor(private configService: ConfigService) {}
 
     getDatabaseHost(): string {
-
-        console.log(this.configService, 'this.configService.get<string>())')
-
         return this.configService.get<string>('DATABASE_HOST');
     }
     getDatabasePort(): number {
