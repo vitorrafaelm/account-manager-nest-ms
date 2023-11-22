@@ -4,9 +4,12 @@ services:
     container_name: account-manager-api
     build:
       context: ./
-      target: "dev"
+      target: development
       dockerfile: Dockerfile
-    entrypoint: ["npm", "run", "start:dev"]
+    command: npm run start:dev
+    restart: always
+    volumes:
+      - .:/usr/src/app
     env_file: 
       - .env/local.env
     ports:
