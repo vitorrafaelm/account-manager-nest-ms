@@ -2,7 +2,6 @@ import { Broker } from "src/domain/models/broker";
 import { BrokerRepository } from "src/domain/repositories/brokerRepository.interface";
 import { CreateBroker } from "src/infrastructure/controllers/broker/dtos/createBroker";
 import { UserCreatedPublishService } from "src/infrastructure/rabbitmq/publishers/user-created/user-create-publish.service";
-import { UserCreatedPublishModule } from "src/infrastructure/rabbitmq/publishers/user-created/user-created-publish.module";
 
 export class CreateBrokerUseCase {
     constructor(
@@ -19,7 +18,8 @@ export class CreateBrokerUseCase {
             document_number,
             broker_identifier,
             profile_picture,
-            account_status
+            account_status, 
+            address
         }: CreateBroker
     ): Promise<Broker> {
         const broker = new Broker();
@@ -32,6 +32,8 @@ export class CreateBrokerUseCase {
         broker.broker_identifier = broker_identifier;
         broker.profile_picture = profile_picture;
         broker.account_status = account_status;
+
+        broker.address = address;
 
         const insertionResult = await this.brokerRepository.insert(broker);
         this.userCreatedPublish.publish(insertionResult);
