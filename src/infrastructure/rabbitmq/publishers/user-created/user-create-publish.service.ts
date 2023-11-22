@@ -7,7 +7,7 @@ export class UserCreatedPublishService {
 
     async publish(message: any) {
         try {
-            this.amqpConnection.publish('user_created', '', message)
+            this.amqpConnection.publish('broker_created', '', message)
         } catch (error) {
             throw new Error(error)
         }
