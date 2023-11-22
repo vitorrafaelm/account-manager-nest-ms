@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Broker } from "./broker.entity";
 
 @Entity()
 export class Address {
@@ -6,7 +7,11 @@ export class Address {
     id: number; 
 
     @Column('varchar')
-    user_identifier: string;
+    broker_identifier: string;
+
+    @OneToOne(() => Broker, (broker) => broker.address)
+    @JoinColumn({ name: 'broker_identifier' })
+    broker: Broker;
 
     @Column('varchar')
     address_line_one: string;

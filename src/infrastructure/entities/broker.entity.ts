@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, Index, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Address } from "./address.entity";
 
 @Entity()
 export class Broker {
@@ -28,6 +29,9 @@ export class Broker {
 
     @Column('varchar')
     account_status: string;
+
+    @OneToOne(() => Address, (address) => address.broker, { cascade: true })
+    address: Address;
 
     @CreateDateColumn({ name: 'createdAt' })
     createdAt: Date;
