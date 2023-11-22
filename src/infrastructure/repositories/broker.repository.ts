@@ -14,17 +14,19 @@ export class DatabaseBrokerRepository implements BrokerRepository {
     ) {}
 
     async get(brokerId: number): Promise<Broker> {
-        return await this.brokerEntityRepository.findOne({ where: { id: brokerId } }); 
+        return await this.brokerEntityRepository.findOne({ where: { id: brokerId }, relations: { address: true } }); 
     }
 
     async insert(broker: Broker): Promise<Broker> {
-        const brokerCreated = this.brokerEntityRepository.create(broker)
-        const brokerInserted = await this.brokerEntityRepository.save(brokerCreated); 
+        const brokerCreated = this.brokerEntityRepository.create(broker);
+
+        const brokerInserted = await this.brokerEntityRepository.save(brokerCreated);
         return this.brokerToEntity(brokerInserted);
     }
 
     async update(broker: Broker): Promise<Broker> {
-        throw new Error("Method not implemented.");
+        const brokerUpdated = await this.brokerEntityRepository.save({ id: broker.id, ...broker });
+        return brokerUpdated;
     }
 
     async delete(brokerId: number): Promise<void> {
@@ -45,6 +47,8 @@ export class DatabaseBrokerRepository implements BrokerRepository {
         broker.account_status = broker_inserted.account_status;
         broker.createdAt = broker_inserted?.createdAt; 
         broker.updatedAt = broker_inserted?.updatedAt;
+
+        broker.address = broker_inserted.address;
 
         return broker;
     }
