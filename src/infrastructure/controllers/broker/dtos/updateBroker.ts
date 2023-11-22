@@ -1,7 +1,10 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { Address } from './address';
 
-export class CreateBroker {
+export class UpdateBroker {
+    @IsNotEmpty()
+    id: number; 
+
     @IsNotEmpty()
     @IsString()
     name: string;
