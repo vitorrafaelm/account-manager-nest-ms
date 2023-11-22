@@ -1,3 +1,5 @@
+import { Address } from "./address";
+
 export class Broker {
     id: number; 
     name: string;
@@ -10,4 +12,6 @@ export class Broker {
     account_status: string;
     createdAt: Date;
     updatedAt: Date;
+
+    address: Address;
 }
