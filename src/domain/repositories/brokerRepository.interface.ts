@@ -5,4 +5,8 @@ export interface BrokerRepository {
     insert(broker: Broker): Promise<Broker>; 
     update(broker: Broker): Promise<Broker>; 
     delete(brokerId: number): Promise<void>; 
+
+    getUserByEmail(email: string): Promise<Broker>;
+    getUserByIdentifier(identifier: string): Promise<Broker>;
+    softDelete(broker: Broker): Promise<Broker>; 
 }
