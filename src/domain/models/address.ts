@@ -7,6 +7,7 @@ export class Address {
     city: string;
     state: string; 
     country: string;
+    is_deleted: boolean;
     created_at: Date; 
     updated_at: Date;
 }
