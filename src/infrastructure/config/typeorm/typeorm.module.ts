@@ -12,12 +12,12 @@ export const getTypeOrmModuleOptions = (config: EnvironmentConfigService): TypeO
     password: config.getDatabasePassword(),
     database: config.getDatabaseName(),
     entities: [__dirname + './../../**/*.entity{.ts,.js}'],
-    synchronize: true,
+    synchronize: false,
     schema: process.env.DATABASE_SCHEMA, 
-    migrationsRun: false,
-    migrations: [__dirname + '/migrations/**/*.entity{.ts,.js}'], 
+    migrationsRun: true,
+    migrations: [__dirname + '/migrations/**/*{.ts,.js}'], 
     cli: {
-      migrationsDir: 'src/migrations',
+      migrationsDir: __dirname + '/migrations/**/*{.ts,.js}',
     }
   } as TypeOrmModuleOptions);
 
