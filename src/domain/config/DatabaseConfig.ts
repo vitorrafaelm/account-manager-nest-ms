@@ -6,4 +6,6 @@ export interface DatabaseConfig {
     getDatabaseName(): string;
     getDatabaseSchema(): string;
     getDatabaseSync(): boolean; 
+    getEncryptKey(): string;
+    getInitVectorKey(): string;
 }
