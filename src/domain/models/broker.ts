@@ -7,11 +7,13 @@ export class Broker {
     password: string;
     document_type: string;
     document_number: string;
-    broker_identifier: string;
+    identifier: string;
     profile_picture: string;
     account_status: string;
+    iv: string; 
+    is_deleted: boolean;
     createdAt: Date;
     updatedAt: Date;
 
-    address: Address;
+    addresses: Address;
 }
