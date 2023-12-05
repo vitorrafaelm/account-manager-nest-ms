@@ -1,16 +1,19 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Broker } from "./broker.entity";
 
-@Entity()
+@Entity('addresses')
 export class Address {
     @PrimaryGeneratedColumn()
     id: number; 
 
+    @Column('int')
+    broker_id: Number;
+
     @Column('varchar')
     broker_identifier: string;
 
-    @OneToOne(() => Broker, (broker) => broker.address)
-    @JoinColumn({ name: 'broker_identifier' })
+    @OneToOne(() => Broker, (broker) => broker.addresses)
+    @JoinColumn({ name: 'broker_id' })
     broker: Broker;
 
     @Column('varchar')
@@ -31,9 +34,12 @@ export class Address {
     @Column('text')
     country: string;
 
-    @CreateDateColumn({ name: 'createdAt' })
+    @Column('boolean')
+    is_deleted: boolean;
+
+    @CreateDateColumn({ name: 'created_at' })
     created_at: Date;
 
-    @CreateDateColumn({ name: 'updatedAt' })
+    @CreateDateColumn({ name: 'updated_at' })
     updated_at: Date;
 }

@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, Index, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Address } from "./address.entity";
 
-@Entity()
+@Entity('brokers')
 export class Broker {
     @PrimaryGeneratedColumn()
     id: number; 
@@ -22,7 +22,7 @@ export class Broker {
     document_number: string;
 
     @Column('varchar')
-    broker_identifier: string;
+    identifier: string;
 
     @Column('text')
     profile_picture: string;
@@ -30,12 +30,18 @@ export class Broker {
     @Column('varchar')
     account_status: string;
 
-    @OneToOne(() => Address, (address) => address.broker, { cascade: true })
-    address: Address;
+    @Column('text')
+    iv: string;
 
-    @CreateDateColumn({ name: 'createdAt' })
+    @Column('boolean')
+    is_deleted: boolean;
+
+    @OneToOne(() => Address, (address) => address.broker, { cascade: true })
+    addresses: Address;
+
+    @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;
 
-    @CreateDateColumn({ name: 'updatedAt' })
+    @CreateDateColumn({ name: 'updated_at' })
     updatedAt: Date;
 }
