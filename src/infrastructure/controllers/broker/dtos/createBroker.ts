@@ -24,7 +24,7 @@ export class CreateBroker {
 
     @IsNotEmpty()
     @IsString()
-    broker_identifier: string;
+    identifier: string;
 
     @IsString()
     profile_picture: string;
