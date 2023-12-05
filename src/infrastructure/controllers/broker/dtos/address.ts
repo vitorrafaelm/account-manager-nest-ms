@@ -2,7 +2,7 @@ import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class Address {
     id: number; 
-
+    
     broker_identifier: string;
 
     @IsNotEmpty()
@@ -32,4 +32,6 @@ export class Address {
     created_at: Date;
 
     updated_at: Date;
+
+    is_deleted: boolean;
 }
