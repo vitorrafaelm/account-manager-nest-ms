@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { Address } from './address';
 
 export class UpdateBroker {
@@ -27,7 +27,7 @@ export class UpdateBroker {
 
     @IsNotEmpty()
     @IsString()
-    broker_identifier: string;
+    identifier: string;
 
     @IsString()
     profile_picture: string;
@@ -38,4 +38,7 @@ export class UpdateBroker {
 
     @IsNotEmpty()
     address: Address;
+
+    @IsNotEmpty()
+    is_deleted: boolean;
 }
